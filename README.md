@@ -3,6 +3,10 @@ Rest.li on Jetty
 
 ## This is an example project I copied for my own uses from the Rest.li open source project. 
 
+Notes:
+1. Use Java 8. Otherwise `gradle publishRestliIdl` will fail
+
+
 This is a standalone example that demonstrates a very simple RestLi
 client and server. The code and logic behind it is described in detail
 in:
