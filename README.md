@@ -1,7 +1,7 @@
 Rest.li on Jetty
 ==============================
 
-## This is an example project I copied for my own uses from the Rest.li open source project. 
+## This is an example project I copied for my own uses from the linkedin/rest.li open source project. 
 
 Notes:
 1. Use Java 8. Otherwise `gradle publishRestliIdl` will fail
