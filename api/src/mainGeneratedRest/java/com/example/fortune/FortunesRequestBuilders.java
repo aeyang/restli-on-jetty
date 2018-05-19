@@ -19,7 +19,7 @@ import com.linkedin.restli.common.ResourceSpecImpl;
  * generated from: com.example.fortune.impl.FortunesResource
  * 
  */
-@Generated(value = "com.linkedin.pegasus.generator.JavaCodeUtil", comments = "Rest.li Request Builder. Generated from /Users/alyang/My_Projects/restliOnJetty/quickstart/api/src/main/idl/com.example.fortune.fortunes.restspec.json.", date = "Sun Mar 04 14:30:21 PST 2018")
+@Generated(value = "com.linkedin.pegasus.generator.JavaCodeUtil", comments = "Rest.li Request Builder. Generated from /Users/alyang/My_Projects/restliOnJetty/quickstart/api/src/main/idl/com.example.fortune.fortunes.restspec.json.", date = "Mon May 14 13:19:02 PDT 2018")
 public class FortunesRequestBuilders
     extends BuilderBase
 {
