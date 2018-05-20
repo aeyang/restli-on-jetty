@@ -1,0 +1,33 @@
+{
+  "type": "record",
+  "name": "Salary",
+  "namespace": "com.example.salary",
+  "doc": "A salary object for a particular title, company, region",
+  "fields": [
+    {
+      "name": "title",
+      "type": "string",
+      "doc": "title of the salary submission"
+    },
+    {
+      "name": "company",
+      "type": "string",
+      "doc": "company of the salary submission"
+    },
+    {
+      "name": "region",
+      "type": "string",
+      "doc": "region of the salary submission"
+    },
+    {
+      "name": "low",
+      "type": "double",
+      "doc": "title of the salary submission"
+    },
+    {
+      "name": "high",
+      "type": "double",
+      "doc": "title of the salary submission"
+    }
+  ]
+}

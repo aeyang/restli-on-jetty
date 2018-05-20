@@ -10,6 +10,8 @@ dependencies {
   compile project(path: ':api', configuration: 'dataTemplate')
   compile spec.product.pegasus.restliServer
   compile spec.product.pegasus.restliNettyStandalone
+  compile 'org.postgresql:postgresql:42.2.2.jre7'
+
 }
 
 // Below is only used for running jetty from within gradle for demo purposes.

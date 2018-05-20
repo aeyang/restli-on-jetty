@@ -13,7 +13,7 @@
     <async-supported>true</async-supported>
     <init-param>
       <param-name>resourcePackages</param-name>
-      <param-value>com.example.fortune.impl</param-value>
+      <param-value>com.example.fortune.impl;com.example.salary.impl</param-value>
     </init-param>
     <init-param>
       <param-name>parseqThreadPoolSize</param-name>
