@@ -1,38 +1,10 @@
-Rest.li on Jetty
+Salary Submission Web Service with Rest.li on Jetty
 ==============================
 
-## This is an example project I copied for my own uses from the linkedin/rest.li open source project. 
+## This is a project I use to practice multiple technologies and concepts common in Web Services.
 
-Notes:
-1. Use Java 8. Otherwise `gradle publishRestliIdl` will fail
+1. Rest.li
+2. Web apps using Jetty
+3. Postgresql and working with JDBC
+4. DAO
 
-
-This is a standalone example that demonstrates a very simple RestLi
-client and server. The code and logic behind it is described in detail
-in:
-
-https://github.com/linkedin/pegasus/wiki/Quickstart:-A-Tutorial-Introduction-to-RestLi
-
-Please execute all commands below in the examples/quickstart folder
-
-To build, use gradle 1.8 or greater.  If you need, you can run `../../gradlew wrapper` to generate a ./gradlew wrapper in this sample directory that will use gradle 1.8.  If you do
-this, use `./gradlew` instead of `gradle` for the remainder of this README.
-
-```
-gradle publishRestliIdl
-gradle build
-```
-
-The first line is required to initially propagate the pdsc and idl changes.  Subsequent builds can be run with only `gradle build`
-
-You can then run the server with:
-
-`gradle JettyRunWar`
-
-Once running, you can send a GET request to the server with:
-
-`curl -v http://localhost:8080/fortunes/1`
-
-or run the client with
-
-`gradle startFortunesClient`
