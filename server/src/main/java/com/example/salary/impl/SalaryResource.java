@@ -1,34 +1,10 @@
-/*
-   Copyright (c) 2012 LinkedIn Corp.
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-*/
-
 package com.example.salary.impl;
 
-import com.linkedin.restli.common.HttpStatus;
 import com.linkedin.restli.server.CreateResponse;
 import com.linkedin.restli.server.annotations.RestLiCollection;
-import com.example.salary.Salary;
-import com.linkedin.restli.server.annotations.RestMethod;
 import com.linkedin.restli.server.resources.CollectionResourceTemplate;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
+import com.example.salary.Salary;
+import com.example.salary.ds.SalarySubmissionDao;
 
 /**
  * Very simple Rest.li Resource to save and lookup Salary
@@ -39,71 +15,16 @@ import java.sql.SQLException;
 
 public class SalaryResource extends CollectionResourceTemplate<Integer, Salary>
 {
-  private static String databaseUrl = "jdbc:postgresql://localhost:5432/alyang";
-  private static String user = "alyang";
-  private static String preparedInsertStatement = "INSERT INTO salary_submission(key, title, company, region, low, high) VALUES(?, ?, ?, ?, ?, ?)";
-  private static String preparedSelectStatement = "SELECT * FROM salary_submission WHERE key = ?";
-  private Connection dbConnection;
-
-  public SalaryResource() {
-    try {
-      dbConnection = DriverManager.getConnection(databaseUrl);
-    } catch (SQLException e) {
-      System.out.println("Failed to connect to Database");
-    }
-  }
+  private static SalarySubmissionDao salarySubmissionDao = new SalarySubmissionDao();
 
   @Override
-  public Salary get(Integer key)
-  {
-    Salary salary = new Salary();
-
-    try {
-      PreparedStatement pst = dbConnection.prepareStatement(preparedSelectStatement);
-      pst.setInt(1, key);
-      System.out.println("----- Executing DB SELECT ------");
-      ResultSet results = pst.executeQuery();
-
-      // Move cursor to first
-      if(results.next()) {
-        String company = results.getString("company");
-        String region = results.getString("region");
-        String title = results.getString("title");
-        long low = results.getLong("low");
-        long high = results.getLong("high");
-
-        salary
-            .setCompany(company)
-            .setRegion(region)
-            .setTitle(title)
-            .setLow(low)
-            .setHigh(high);
-      }
-    } catch (SQLException e) {
-      System.out.println(e);
-    }
-
-    return salary;
+  public Salary get(Integer key) {
+    return salarySubmissionDao.getSalarySubmission(key);
   }
 
   @Override
   public CreateResponse create(Salary salary) {
-    try {
-      PreparedStatement pst = dbConnection.prepareStatement(preparedInsertStatement);
-      pst.setInt(1, 1);
-      pst.setString(2, salary.getTitle());
-      pst.setString(3, salary.getCompany());
-      pst.setString(4, salary.getRegion());
-      pst.setDouble(5, salary.getLow());
-      pst.setDouble(6, salary.getHigh());
-
-      System.out.println("----- Executing DB Update -----");
-      pst.executeUpdate();
-    } catch (SQLException e) {
-      System.out.println(e);
-    }
-
-    return new CreateResponse(HttpStatus.S_202_ACCEPTED);
+    return salarySubmissionDao.insertSalarySubmission(salary);
   }
 }
 
