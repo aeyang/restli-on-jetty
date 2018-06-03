@@ -26,6 +26,7 @@ import com.linkedin.restli.server.resources.CollectionResourceTemplate;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
@@ -36,12 +37,13 @@ import java.sql.SQLException;
  */
 @RestLiCollection(name = "salaries", namespace = "com.example.salary")
 
-public class SalaryResource extends CollectionResourceTemplate<Long, Salary>
+public class SalaryResource extends CollectionResourceTemplate<Integer, Salary>
 {
-  String databaseUrl = "jdbc:postgresql://localhost:5432/alyang";
-  String user = "alyang";
-  String preparedInsertStatement = "INSERT INTO salary_submission(key, title, company, region, low, high) VALUES(?, ?, ?, ?, ?, ?)";
-  Connection dbConnection;
+  private static String databaseUrl = "jdbc:postgresql://localhost:5432/alyang";
+  private static String user = "alyang";
+  private static String preparedInsertStatement = "INSERT INTO salary_submission(key, title, company, region, low, high) VALUES(?, ?, ?, ?, ?, ?)";
+  private static String preparedSelectStatement = "SELECT * FROM salary_submission WHERE key = ?";
+  private Connection dbConnection;
 
   public SalaryResource() {
     try {
@@ -52,14 +54,36 @@ public class SalaryResource extends CollectionResourceTemplate<Long, Salary>
   }
 
   @Override
-  public Salary get(Long key)
+  public Salary get(Integer key)
   {
-    return new Salary()
-        .setCompany("LinkedIn")
-        .setRegion("San Francisco Bay Area")
-        .setTitle("Software Engineer")
-        .setHigh(10000)
-        .setLow(80000);
+    Salary salary = new Salary();
+
+    try {
+      PreparedStatement pst = dbConnection.prepareStatement(preparedSelectStatement);
+      pst.setInt(1, key);
+      System.out.println("----- Executing DB SELECT ------");
+      ResultSet results = pst.executeQuery();
+
+      // Move cursor to first
+      if(results.next()) {
+        String company = results.getString("company");
+        String region = results.getString("region");
+        String title = results.getString("title");
+        long low = results.getLong("low");
+        long high = results.getLong("high");
+
+        salary
+            .setCompany(company)
+            .setRegion(region)
+            .setTitle(title)
+            .setLow(low)
+            .setHigh(high);
+      }
+    } catch (SQLException e) {
+      System.out.println(e);
+    }
+
+    return salary;
   }
 
   @Override

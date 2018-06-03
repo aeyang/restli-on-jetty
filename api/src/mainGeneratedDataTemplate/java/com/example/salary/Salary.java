@@ -17,7 +17,7 @@ import com.linkedin.data.template.SetMode;
  * A salary object for a particular title, company, region
  * 
  */
-@Generated(value = "com.linkedin.pegasus.generator.JavaCodeUtil", comments = "Rest.li Data Template. Generated from /Users/alyang/My_Projects/restliOnJetty/quickstart/api/src/main/pegasus/com/example/salary/Salary.pdsc.", date = "Sat May 19 22:20:13 PDT 2018")
+@Generated(value = "com.linkedin.pegasus.generator.JavaCodeUtil", comments = "Rest.li Data Template. Generated from /Users/alyang/My_Projects/restliOnJetty/quickstart/api/src/main/pegasus/com/example/salary/Salary.pdsc.", date = "Sat Jun 02 19:28:25 PDT 2018")
 public class Salary
     extends RecordTemplate
 {
