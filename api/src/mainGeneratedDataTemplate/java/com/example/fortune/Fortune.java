@@ -17,7 +17,7 @@ import com.linkedin.data.template.SetMode;
  * Generate a fortune cookie
  * 
  */
-@Generated(value = "com.linkedin.pegasus.generator.JavaCodeUtil", comments = "Rest.li Data Template. Generated from /Users/alyang/My_Projects/restliOnJetty/quickstart/api/src/main/pegasus/com/example/fortune/Fortune.pdsc.", date = "Sat Jun 02 19:28:24 PDT 2018")
+@Generated(value = "com.linkedin.pegasus.generator.JavaCodeUtil", comments = "Rest.li Data Template. Generated from /Users/alyang/My_Projects/restli-on-jetty/api/src/main/pegasus/com/example/fortune/Fortune.pdsc.", date = "Mon Jul 02 17:51:33 PDT 2018")
 public class Fortune
     extends RecordTemplate
 {

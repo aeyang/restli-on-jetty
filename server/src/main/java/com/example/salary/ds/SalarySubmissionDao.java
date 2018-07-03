@@ -3,8 +3,9 @@ package com.example.salary.ds;
 import com.example.salary.Salary;
 import com.linkedin.restli.common.HttpStatus;
 import com.linkedin.restli.server.CreateResponse;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,13 +13,19 @@ import java.sql.SQLException;
 
 public class SalarySubmissionDao {
 
-  private static String databaseUrl = "jdbc:postgresql://localhost:5432/alyang";
-  private static String user = "alyang";
+  private static final String DATABASE_URL = "jdbc:postgresql://localhost:5432/alyang";
+  private static final String USER = "alyang";
   private Connection dbConnection;
 
   public SalarySubmissionDao() {
+
+    HikariConfig config = new HikariConfig();
+    config.setJdbcUrl(DATABASE_URL);
+    config.setUsername(USER);
+
     try {
-      dbConnection = DriverManager.getConnection(databaseUrl);
+      HikariDataSource dataSource = new HikariDataSource(config);
+      dbConnection = dataSource.getConnection();
     } catch (SQLException e) {
       System.out.println("Failed to connect to Database");
     }

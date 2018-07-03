@@ -4,3 +4,5 @@ build/
 *.iml
 *.iws
 .*
+api/src/mainGeneratedDataTemplate/
+api/src/mainGeneratedRest/
