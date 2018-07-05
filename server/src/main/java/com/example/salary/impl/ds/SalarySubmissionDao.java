@@ -1,4 +1,4 @@
-package com.example.salary.ds;
+package com.example.salary.impl.ds;
 
 import com.example.salary.Salary;
 import com.linkedin.restli.common.HttpStatus;
@@ -31,6 +31,11 @@ public class SalarySubmissionDao {
     }
   }
 
+  /**
+   * Gets Salary by key
+   * @param key
+   * @return Salary
+   */
   public Salary getSalarySubmission(Integer key) {
 
     Salary salary = new Salary();
@@ -42,7 +47,42 @@ public class SalarySubmissionDao {
       System.out.println("----- Executing DB SELECT ------");
       ResultSet results = pst.executeQuery();
 
-      // Move cursor to first
+      salary = parseResultSet(results);
+
+    } catch (SQLException e) {
+      System.out.println(e);
+    }
+
+    return salary;
+  }
+
+  /**
+   * Get Salary by title
+   * @param title Title to search for
+   * @return
+   */
+  public Salary getSalarySubmission(String title) {
+
+    Salary salary = new Salary();
+    String preparedSelectStatement = "SELECT * FROM salary_submission WHERE title = ?";
+
+    try {
+      PreparedStatement pst = dbConnection.prepareStatement(preparedSelectStatement);
+      pst.setString(1, title);
+      ResultSet results = pst.executeQuery();
+
+      salary = parseResultSet(results);
+
+    } catch (SQLException e) {
+      System.out.println(e);
+    }
+
+    return salary;
+  }
+
+  private Salary parseResultSet(ResultSet results) {
+    Salary salary = new Salary();
+    try {
       if (results.next()) {
         String company = results.getString("company");
         String region = results.getString("region");
@@ -52,9 +92,7 @@ public class SalarySubmissionDao {
 
         salary.setCompany(company).setRegion(region).setTitle(title).setLow(low).setHigh(high);
       }
-    } catch (SQLException e) {
-      System.out.println(e);
-    }
+    } catch (Exception e) {}
 
     return salary;
   }

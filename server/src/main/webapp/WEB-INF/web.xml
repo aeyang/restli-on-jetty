@@ -3,12 +3,12 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
 
-  <display-name>Fortunes App</display-name>
-  <description>Tells fortunes</description>
+  <display-name>Salary App</display-name>
+  <description>Stores and Retrieves salaries</description>
 
   <!-- servlet definitions -->
   <servlet>
-    <servlet-name>FortunesServlet</servlet-name>
+    <servlet-name>SalaryServlet</servlet-name>
     <servlet-class>com.linkedin.restli.server.RestliServlet</servlet-class>
     <async-supported>true</async-supported>
     <init-param>
@@ -24,7 +24,7 @@
 
   <!-- servlet mappings -->
   <servlet-mapping>
-    <servlet-name>FortunesServlet</servlet-name>
+    <servlet-name>SalaryServlet</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
 
