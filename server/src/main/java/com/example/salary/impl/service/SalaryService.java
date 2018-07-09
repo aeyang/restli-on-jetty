@@ -11,17 +11,21 @@ import com.linkedin.restli.server.CreateResponse;
  * @author alyang
  */
 public class SalaryService {
-  private static SalarySubmissionDao salarySubmissionDao = new SalarySubmissionDao();
+  private static SalarySubmissionDao _salarySubmissionDao;
+
+  public SalaryService(SalarySubmissionDao salarySubmissionDao) {
+    _salarySubmissionDao = salarySubmissionDao;
+  }
 
   public Salary getSalaryById(Integer key) {
-    return salarySubmissionDao.getSalarySubmission(key);
+    return _salarySubmissionDao.getSalarySubmission(key);
   }
 
   public Salary getSalaryByTitle(String title) {
-    return salarySubmissionDao.getSalarySubmission(title);
+    return _salarySubmissionDao.getSalarySubmission(title);
   }
 
   public CreateResponse createSalary(Salary salary) {
-    return salarySubmissionDao.insertSalarySubmission(salary);
+    return _salarySubmissionDao.insertSalarySubmission(salary);
   }
 }
