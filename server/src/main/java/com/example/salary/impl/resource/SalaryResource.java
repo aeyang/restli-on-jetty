@@ -24,7 +24,8 @@ public class SalaryResource extends CollectionResourceTemplate<Integer, Salary>
     // I can't just do constructor dependency injection here like I can for SalaryService because Rest.li
     // creates these Resources.
     // What is best practice for where to put these xml files?
-    ApplicationContext context = new ClassPathXmlApplicationContext("classpath:com/example/salary/impl/dependencies.xml");
+    ApplicationContext context = new ClassPathXmlApplicationContext(
+        "classpath:com/example/salary/impl/dependencies.xml");
     _salaryService = context.getBean("salaryService", SalaryService.class);
   }
 
