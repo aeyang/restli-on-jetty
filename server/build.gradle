@@ -1,5 +1,4 @@
 // to start a server using a jetty standalone server, run: gradle startJetty (http://localhost:8080/fortunes/1)
-// to start a server using a netty standalone server, run: gradle startNetty (http://localhost:8080/fortunes/1)
 
 apply plugin: 'war'
 apply plugin: 'pegasus'
@@ -9,6 +8,7 @@ ext.apiProject = project(':api')
 dependencies {
   compile project(path: ':api', configuration: 'dataTemplate')
   compile spec.product.pegasus.restliServer
+  compile spec.product.pegasus.restliSpringBridge
   compile spec.product.pegasus.restliNettyStandalone
   compile group: 'org.springframework', name: 'spring-context', version: '5.0.7.RELEASE'
   runtime 'org.postgresql:postgresql:42.2.2'

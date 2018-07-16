@@ -5,6 +5,8 @@ import com.linkedin.restli.server.CreateResponse;
 import com.linkedin.restli.server.annotations.RestLiCollection;
 import com.linkedin.restli.server.resources.CollectionResourceTemplate;
 import com.example.salary.Salary;
+import javax.inject.Inject;
+import javax.inject.Named;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -15,19 +17,15 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  * @author Alan Yang
  */
 @RestLiCollection(name = "salaries", namespace = "com.example.salary")
-
 public class SalaryResource extends CollectionResourceTemplate<Integer, Salary>
 {
-  private static SalaryService _salaryService;
 
-  public SalaryResource() {
-    // I can't just do constructor dependency injection here like I can for SalaryService because Rest.li
-    // creates these Resources.
-    // What is best practice for where to put these xml files?
-    ApplicationContext context = new ClassPathXmlApplicationContext(
-        "classpath:com/example/salary/impl/dependencies.xml");
-    _salaryService = context.getBean("salaryService", SalaryService.class);
-  }
+  /**
+   * Rest.li uses JSR-330 annotation to inject beans.  When rest.li's spring bridge, all spring beans are available.
+   */
+  @Inject
+  @Named("salaryService")
+  private static SalaryService _salaryService;
 
   @Override
   public Salary get(Integer key) {

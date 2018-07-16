@@ -27,7 +27,8 @@ ext.spec = [
       'restliTools' : 'com.linkedin.pegasus:restli-tools:' + pegasusVersion,
       'gradlePlugins' : 'com.linkedin.pegasus:gradle-plugins:' + pegasusVersion,
       'restliNettyStandalone' : 'com.linkedin.pegasus:restli-netty-standalone:' + pegasusVersion,
-      'restliServerStandalone' : 'com.linkedin.pegasus:restli-server-standalone:' + pegasusVersion
+      'restliServerStandalone' : 'com.linkedin.pegasus:restli-server-standalone:' + pegasusVersion,
+      'restliSpringBridge' : 'com.linkedin.pegasus:restli-spring-bridge:'+pegasusVersion
     ]
   ]
 ]

@@ -6,10 +6,19 @@
   <display-name>Salary App</display-name>
   <description>Stores and Retrieves salaries</description>
 
+  <!-- spring dependency injection -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/classes/com/example/salary/impl/dependencies.xml</param-value>
+  </context-param>
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+
   <!-- servlet definitions -->
   <servlet>
-    <servlet-name>SalaryServlet</servlet-name>
-    <servlet-class>com.linkedin.restli.server.RestliServlet</servlet-class>
+    <servlet-name>restliRequestHandler</servlet-name>
+    <servlet-class>org.springframework.web.context.support.HttpRequestHandlerServlet</servlet-class>
     <async-supported>true</async-supported>
     <init-param>
       <param-name>resourcePackages</param-name>
@@ -24,7 +33,7 @@
 
   <!-- servlet mappings -->
   <servlet-mapping>
-    <servlet-name>SalaryServlet</servlet-name>
+    <servlet-name>restliRequestHandler</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
 

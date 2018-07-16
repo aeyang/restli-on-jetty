@@ -7,7 +7,24 @@
   </bean>
 
   <bean id="salaryService" class="com.example.salary.impl.service.SalaryService">
-    <constructor-arg name="salarySubmissionDao" ref="salarySubmissionDao"/>
+    <constructor-arg ref="salarySubmissionDao"/>
+  </bean>
+
+  <!-- An InjectResourceFactory must be created.  It is ApplicationContextAware so
+ must be instantiated via spring and then passed into rest.li -->
+  <bean id="injectResourceFactory" class="com.linkedin.restli.server.spring.SpringInjectResourceFactory" />
+
+  <!--
+    In web.xml, HttpRequestHandlerServlet loads this "restliRequestHandler" spring bean as a servlet.  For details, see:
+    http://static.springsource.org/spring-framework/docs/3.2.0.RC1/api/org/springframework/web/context/support/HttpRequestHandlerServlet.html
+  -->
+  <bean id="restliRequestHandler" class="com.linkedin.restli.server.spring.RestliHttpRequestHandler">
+    <constructor-arg>
+      <bean class="com.linkedin.restli.server.RestLiConfig">
+        <property name="resourcePackageNames" value="com.example.salary.impl" />
+      </bean>
+    </constructor-arg>
+    <constructor-arg ref="injectResourceFactory" />
   </bean>
 
 </beans>
